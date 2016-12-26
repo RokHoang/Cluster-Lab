@@ -1,6 +1,7 @@
 import random
 import operator
 import csv
+import sys
 from math import sqrt
 def euclidean(a,b):
 	return sqrt(sum([(a[i]-b[i])**2 for i in range(len(a))]))
@@ -48,12 +49,12 @@ def writefile(fo,data):
 		for row in data[i]:
 			writer.writerow(row+[i])
 if __name__ == "__main__":
-	fi = "fi.txt"
-	fo = "fo.txt"
-	k = 2
-	random_seed = 3
+	fi = sys.argv[1]
+	fo = sys.argv[2]
+	k = int(sys.argv[3])
+	random_seed = int(sys.argv[4])
 	#random.seed(random_seed)
-	dist_type = 1
+	dist_type = int(sys.argv[5])
 	#1:euclid
 	#2:manhatta
 	#3:cosine
@@ -62,3 +63,5 @@ if __name__ == "__main__":
 	#print data
 	dataout = kmean(data,k,dist[dist_type-1])
 	writefile(fo,dataout)
+
+	#python mykmeans.py fi.txt fo.txt 2 3 1
