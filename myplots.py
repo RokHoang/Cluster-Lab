@@ -53,9 +53,8 @@ class MyPlot():
                      markerfacecolor=col, markersize=14)
 
         plt.title('Clusters according to attributes in x and y')
-        plt.show()
-        #plt.savefig(self.output)
-        #return 1
+        plt.savefig(self.output)
+        return 1
 
 if __name__ == '__main__':
     if len(sys.argv) != 5:
