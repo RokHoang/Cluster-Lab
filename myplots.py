@@ -47,13 +47,20 @@ class MyPlot():
         colors = plt.cm.Spectral(np.linspace(0, 1, len(self.clusters)))
         for datum in self.data:
             col = colors[int(datum[-1]), :]
-            plt.plot(datum[self.x], datum[self.y], 'o', markerfacecolor=col, markersize=14)
+
+            # Add a little noise to prevent overlap between data point
+            plt.plot(datum[self.x] + random.uniform(0, 0.1), datum[self.y] + random.uniform(0, 0.1), 'o',
+                     markerfacecolor=col, markersize=14)
 
         plt.title('Clusters according to attributes in x and y')
-        plt.savefig(self.output)
-        return 1
+        plt.show()
+        #plt.savefig(self.output)
+        #return 1
 
 if __name__ == '__main__':
+    if len(sys.argv) != 5:
+        print 'Wrong parameter'
+        exit()
     input = sys.argv[1]
     output = sys.argv[2]
     x = sys.argv[3]
