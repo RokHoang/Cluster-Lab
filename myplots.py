@@ -25,7 +25,7 @@ class MyPlot():
         # Convert data to float
         self.data = [[float(j) for j in i] for i in data]
 
-        # Get the cluster
+        # Get the unique clusters
         clusters = [data[-1] for data in self.data]
         self.clusters = set(clusters)
 

@@ -41,7 +41,17 @@ def readfile(fi):
 	csvfile = open(fi, 'rb')
 	data = list(csv.reader(csvfile))
 	csvfile.close()
-	return [[float(j) for j in i] for i in data]
+	data_list = []
+	for i in range(1, len(data)):
+		datum_list = []
+		for datum in data[i]:
+			try:
+				datum_list.append(int(datum))
+			except:
+				pass
+		data_list.append(datum_list)
+	return data_list
+	#return [[float(j) for j in i] for i in data]
 def writefile(fo,data):
 	csvfile = open(fo, "wb")
 	writer = csv.writer(csvfile)
