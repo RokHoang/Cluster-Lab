@@ -75,6 +75,10 @@ def writefile(fo,data):
 		for row in data[i]:
 			writer.writerow(row+[i])
 if __name__ == "__main__":
+	if len(sys.argv) != 6:
+		print 'Wrong parameter'
+		exit()
+
 	fi = sys.argv[1]
 	fo = sys.argv[2]
 	k = int(sys.argv[3])

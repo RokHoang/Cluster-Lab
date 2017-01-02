@@ -49,10 +49,12 @@ class MyPlot():
             col = colors[int(datum[-1]), :]
 
             # Add a little noise to prevent overlap between data point
-            plt.plot(datum[self.x] + random.uniform(0, 0.1), datum[self.y] + random.uniform(0, 0.1), 'o',
+            plt.plot(datum[self.x] + random.uniform(0, 0.5), datum[self.y] + random.uniform(0, 0.5), 'o',
                      markerfacecolor=col, markersize=14)
 
-        plt.title('Clusters according to attributes in x and y')
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.title('Clusters according to attributes in X and Y')
         plt.savefig(self.output)
         return 1
 
