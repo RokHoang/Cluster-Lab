@@ -23,7 +23,7 @@ class MyPlot():
         data = list(csv.reader(csvfile))
 
         # Convert data to float
-        self.data = [[float(j) for j in i] for i in data]
+        self.data = [[float(j) for j in i[1:]] for i in data[1:]]
 
         # Get the unique clusters
         clusters = [data[-1] for data in self.data]

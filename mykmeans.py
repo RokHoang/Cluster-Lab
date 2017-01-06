@@ -7,16 +7,16 @@ from math import pi
 import math 
 from math import sqrt
 def euclidean(a,b):
-	return sqrt(sum([(a[i]-b[i])**2 for i in range(len(a))]))
+	return sqrt(sum([(a[i]-b[i])**2 for i in range(1,len(a))]))
 def manhattan(a,b):
-	return sum([abs(a[i] - b[i]) for i in range(len(a))])
+	return sum([abs(a[i] - b[i]) for i in range(1,len(a))])
 def cosine(a,b):
 		#result = sum([a[i]*b[i] for i in range(len(a))])/\
 		#	(sqrt(sum([(a[i])**2 for i in range(len(a))]))*\
 		#	sqrt(sum([(b[i])**2 for i in range(len(a))])))
 	try:
-		a_ = np.array(a)
-		b_ = np.array(b)
+		a_ = np.array(a[1:])
+		b_ = np.array(b[1:])
 		result = np.dot(a_.T,b_)/(sqrt(np.dot(a_,a_))*sqrt(np.dot(b_,b_)))
 		if result >= 1.0:
 			return 0.0
@@ -27,9 +27,9 @@ def nearest(d,means,dist):
 	dist_to_centroid = [dist(m,d) for m in means]
 	return dist_to_centroid.index(min(dist_to_centroid))
 def center(s):
-	return map(lambda items: sum(items)/len(items),zip(*s))
+	return [["x"]] + map(lambda items: sum(items)/len(items),zip(*s)[1:])
 def kmean(data, k, dist):
-	data_uni = [list(x) for x in set(tuple(x) for x in data)]
+	data_uni = [["x"] + list(y) for y in set(tuple(x[1:]) for x in data)]
 
 	means = [data_uni[i] for i in random.sample(range(len(data_uni)), k)]
 	#means = [data[i] for i in random.sample(range(len(data)), k)]
@@ -43,7 +43,7 @@ def kmean(data, k, dist):
 		for d in data:
 			subset[nearest(d,means,dist)].append(d)
 		means = [center(s) for s in subset]
-		if (means == means_old):
+		if (means[1:] == means_old[1:]):
 			break
 	SSE = 0.0
 	for i in range(len(subset)):
@@ -67,10 +67,11 @@ def readfile(fi):
 		data_list.append(datum_list)
 	return data_list
 	"""
-	return [[float(j) for j in i[1:]] for i in data[1:]]
-def writefile(fo,data):
+	return data[0],[[i[0]] + [float(j) for j in i[1:]] for i in data[1:]]
+def writefile(fo,data_type,data):
 	csvfile = open(fo, "wb")
 	writer = csv.writer(csvfile)
+	writer.writerow(data_type+["Type"])
 	for i in range(len(data)):
 		for row in data[i]:
 			writer.writerow(row+[i])
@@ -90,9 +91,9 @@ if __name__ == "__main__":
 	#2:manhatta
 	#3:cosine
 	dist = [euclidean,manhattan,cosine]
-	data = readfile(fi)
+	data_type,data = readfile(fi)
 
 	dataout = kmean(data,k,dist[dist_type-1])
-	writefile(fo,dataout)
+	writefile(fo,data_type,dataout)
 
 	#python mykmeans.py fi.txt fo.txt 2 3 1
