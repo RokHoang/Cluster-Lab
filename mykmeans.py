@@ -11,16 +11,19 @@ def euclidean(a,b):
 def manhattan(a,b):
 	return sum([abs(a[i] - b[i]) for i in range(1,len(a))])
 def cosine(a,b):
-		#result = sum([a[i]*b[i] for i in range(len(a))])/\
-		#	(sqrt(sum([(a[i])**2 for i in range(len(a))]))*\
-		#	sqrt(sum([(b[i])**2 for i in range(len(a))])))
+
+	# Sử dụng angular distance tức là arccos của giá trị similarity,
+	# đồng thời là giá trị distance để sử dụng trong thuật toán kmean.
+	# 
+	# trong công thức có chia cho pi nhưng do mẫu luôn luôn là const nên bỏ qua.
+	# Nguồn: https://en.wikipedia.org/wiki/Cosine_similarity
 	try:
 		a_ = np.array(a[1:])
 		b_ = np.array(b[1:])
-		result = np.dot(a_.T,b_)/(sqrt(np.dot(a_,a_))*sqrt(np.dot(b_,b_)))
-		if result >= 1.0:
+		similarity = np.dot(a_.T,b_)/(sqrt(np.dot(a_,a_))*sqrt(np.dot(b_,b_)))
+		if similarity >= 1.0:
 			return 0.0
-		return math.acos(result)
+		return math.acos(similarity)
 	except:
 		raise
 def nearest(d,means,dist):
@@ -55,18 +58,6 @@ def readfile(fi):
 	csvfile = open(fi, 'rb')
 	data = list(csv.reader(csvfile))
 	csvfile.close()
-	"""
-	data_list = []
-	for i in range(1, len(data)):
-		datum_list = []
-		for datum in data[i]:
-			try:
-				datum_list.append(int(datum))
-			except:
-				pass
-		data_list.append(datum_list)
-	return data_list
-	"""
 	return data[0],[[i[0]] + [float(j) for j in i[1:]] for i in data[1:]]
 def writefile(fo,data_type,data):
 	csvfile = open(fo, "wb")
