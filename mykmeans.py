@@ -12,7 +12,7 @@ def manhattan(a,b):
 	return sum([abs(a[i] - b[i]) for i in range(1,len(a))])
 def cosine(a,b):
 
-	# Sử dụng angular distance tức là arccos của giá trị similarity,
+	# Sử dụng angular distance tức là arccos của giá trị cosine similarity,
 	# đồng thời là giá trị distance để sử dụng trong thuật toán kmean.
 	# 
 	# trong công thức có chia cho pi nhưng do mẫu luôn luôn là const nên bỏ qua.
