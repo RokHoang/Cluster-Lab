@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import random
 import operator
 import csv
