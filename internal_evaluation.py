@@ -24,7 +24,7 @@ class InternalEvaluation:
         data = list(csv.reader(csvfile))
 
         # Convert to float type
-        data_list = [[float(x) for x in datum] for datum in data]
+        data_list = [[float(x) for x in datum[1:]] for datum in data[1:]]
 
         # Group data into cluster
         for datum in data_list:
