@@ -4,7 +4,7 @@ from collections import defaultdict
 import itertools
 def main():
 	num_run = 20
-	weak_sign = 1
+	weak_sign = 20
 	data_type,data = readfile("animal-dental.csv")
 	#d = [[] for i in range(num_run)]
 	ddict = defaultdict(lambda:defaultdict(int))
@@ -17,10 +17,10 @@ def main():
 	weaklink = defaultdict(int)
 	for key,value in ddict.iteritems():
 		for v in value.values():
-			if (v <= 1):
+			if (v <= 3):
 				weaklink[key] += 1
 	for key,value in weaklink.iteritems():
-		if (value <= weak_sign):
+		if (value >= weak_sign):
 			print key
 	#print [[len(j) for j in i]for i in d]
 	#pprint.pprint(ddict)
