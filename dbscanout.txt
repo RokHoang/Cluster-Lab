@@ -1,0 +1,16 @@
+Cluster: 58
+|Correct: 7
+|Precision: 1
+|Label: 0.142857142857
+Cluster: 20
+|Correct: 6
+|Precision: 1
+|Label: 0.166666666667
+Cluster: 14
+|Correct: 6
+|Precision: 1
+|Label: 0.166666666667
+Cluster: -1
+|Correct: 47
+|Precision: 1
+|Label: 0.0212765957447
