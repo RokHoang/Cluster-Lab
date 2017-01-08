@@ -23,7 +23,7 @@ class MyPlot():
         data = list(csv.reader(csvfile))
 
         # Convert data to float
-        self.data = [[float(j) for j in i] for i in data]
+        self.data = [[float(j) for j in i[1:]] for i in data[1:]]
 
         # Get the unique clusters
         clusters = [data[-1] for data in self.data]
@@ -49,13 +49,14 @@ class MyPlot():
             col = colors[int(datum[-1]), :]
 
             # Add a little noise to prevent overlap between data point
-            plt.plot(datum[self.x] + random.uniform(0, 0.1), datum[self.y] + random.uniform(0, 0.1), 'o',
+            plt.plot(datum[self.x] + random.uniform(0, 0.5), datum[self.y] + random.uniform(0, 0.5), 'o',
                      markerfacecolor=col, markersize=14)
 
-        plt.title('Clusters according to attributes in x and y')
-        plt.show()
-        #plt.savefig(self.output)
-        #return 1
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.title('Clusters according to attributes in X and Y')
+        plt.savefig(self.output)
+        return 1
 
 if __name__ == '__main__':
     if len(sys.argv) != 5:
